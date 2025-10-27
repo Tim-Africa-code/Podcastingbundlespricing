@@ -125,7 +125,7 @@ export function BrandComparison({ tiers }: BrandComparisonProps) {
 
       <div className="mt-8 text-center">
         <Button 
-          className="bg-[#CC9E00] hover:bg-[#CC9E00]/90 text-white px-8"
+          className="bg-[#CC9E00] hover:bg-[#b38a00] text-white px-8 transition-all duration-300 hover:scale-105 hover:shadow-lg"
           asChild
         >
           <a href="https://www.tim.africa/contact">Get Package</a>

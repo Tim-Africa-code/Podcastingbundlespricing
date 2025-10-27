@@ -1,18 +1,25 @@
 import { Mail, Globe, Phone } from 'lucide-react';
 
-export function Footer() {
+interface FooterProps {
+  isDark?: boolean;
+}
+
+export function Footer({ isDark = false }: FooterProps) {
   const footerLinks = [
     { label: 'Home', href: 'https://www.tim.africa/' },
     { label: 'About Us', href: 'https://www.tim.africa/about' },
     { label: 'Podcasts', href: 'https://www.tim.africa/services/podcast-service' },
     { label: 'Services', href: 'https://www.tim.africa/services' },
     { label: 'Pricing', href: 'https://www.pricing.tim.africa' },
+    { label: 'Shop', href: 'https://www.tim.africa/shop' },
     { label: 'Insights', href: 'https://www.tim.africa/insights' },
     { label: 'Contact us', href: 'https://www.tim.africa/contact' },
   ];
 
   return (
-    <footer className="bg-[#172D3F] text-white py-8 mt-16">
+    <footer className={`text-white py-8 mt-16 transition-colors duration-300 ${
+      isDark ? 'bg-[#101010]' : 'bg-[#172D3F]'
+    }`}>
       <div className="max-w-7xl mx-auto px-4">
         {/* Navigation Links */}
         <div className="mb-6">

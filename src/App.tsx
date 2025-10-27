@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { HeaderNav } from './components/HeaderNav';
 import { ToggleSwitch } from './components/ToggleSwitch';
+import { ThemeToggle } from './components/ThemeToggle';
 import { HeadingBlock } from './components/HeadingBlock';
 import { BundleCard } from './components/BundleCard';
 import { Footer } from './components/Footer';
@@ -12,17 +13,24 @@ const creatorBundles = [
     level: 1,
     prices: [
       { episodes: 1, price: 'R4 999pm' },
-      { episodes: 2, price: 'R8 999pm' }
+      { episodes: 2, price: 'R7 999pm' }
     ],
     deliverables: [
       '1 x 90mins studio recording (2hr slot)',
       'Colour grading',
       'Royalty-Free Music',
-      'Animated Logo',
-      'Cover image design',
-      'Audio + Video distribution',
-      'Titles & Descriptions',
-      '1 revision included'
+      { item: 'Custom Intro/Outro with branding', included: false },
+      { item: 'Up to 1 x Social media reels (15-60s)', included: false },
+      { item: 'Up to 2 x Quote graphics & Stills', included: false },
+      { item: 'Captions for Social Media Clips', included: false },
+      { item: 'Social Media Post Copy Recommendations', included: false },
+      { item: 'Cover image design', included: false },
+      { item: 'Titles & Descriptions for episode/s', included: false },
+      { item: 'Full transcript', included: false },
+      { item: 'Distribution audio & Video (YouTube) podcast', included: false },
+      'Podcast website set-up',
+      { item: 'Analytics & performance tracking', included: false },
+      'No revisions included'
     ],
     turnaround: '14 working days'
   },
@@ -35,15 +43,20 @@ const creatorBundles = [
     ],
     deliverables: [
       '1 x 90mins studio recording (2hr slot)',
-      'Up to 3 deliverables per episode',
-      'Colour grading',
+      'Colour grading and post-production editing',
       'Royalty-Free Music',
-      'Animated Logo',
+      'Custom Intro/Outro with branding',
+      'Up to 1 x Social media reels (15-60s)',
+      'Up to 2 x Quote graphics & Stills',
+      'Captions for Social Media Clips',
+      'Social Media Post Copy Recommendations',
       'Cover image design',
-      'Subtitles',
-      'Audio + Video distribution',
-      'Titles & Descriptions',
-      '1 revision included'
+      { item: 'Titles & Descriptions for episode/s', included: false },
+      { item: 'Full transcript', included: false },
+      { item: 'Distribution audio & Video (YouTube) podcast', included: false },
+      'Podcast website set-up',
+      { item: 'Analytics & performance tracking', included: false },
+      '1 revisions included'
     ],
     turnaround: '12 working days'
   },
@@ -56,16 +69,20 @@ const creatorBundles = [
     ],
     deliverables: [
       '1 x 90mins studio recording (2hr slot)',
-      'Up to 5 deliverables per episode',
-      'Colour grading & Advanced editing',
+      'Colour grading and post-production editing',
       'Royalty-Free Music',
-      'Animated Logo & Intro/Outro',
-      'Cover image & Thumbnail design',
-      'Subtitles & Captions',
-      'Audio + Video distribution',
-      'Titles & Descriptions (SEO optimized)',
-      '2 revisions included',
-      'Social media teaser clips'
+      'Custom Intro/Outro with branding',
+      'Up to 4 x Social media reels (15-60s)',
+      'Up to 3 x Quote graphics & Stills',
+      'Captions for Social Media Clips',
+      'Social Media Post Copy Recommendations',
+      'Cover image design',
+      'Titles & Descriptions for episode/s',
+      'Full transcript',
+      'Distribution audio & Video (YouTube) podcast',
+      'Podcast website set-up',
+      'Analytics & performance tracking',
+      '2 revisions included'
     ],
     turnaround: '10 working days',
     featured: true
@@ -78,20 +95,24 @@ const brandBundles = [
     tier: 'Elite',
     level: 3,
     prices: [
-      { episodes: 1, price: 'R13 999' },
-      { episodes: 2, price: 'R24 999' }
+      { episodes: 1, price: 'R15 999' },
+      { episodes: 2, price: 'R29 999' }
     ],
     deliverables: [
-      '90-min video recording & premium editing',
+      'Up to 90-min video recording',
+      'Producer on set',
+      'Premium editing',
       'Custom Intro/Outro with branding',
-      '5 x Social media reels (15-60s)',
-      '7 x Quote graphics & Stills',
+      'Up to 5 x Social media reels (15-60s)',
+      'Up to 7 x Quote graphics & Stills',
       '2 x Thumbnail designs',
-      'Subtitles & Captions',
+      'Captions for Social Media Clips',
+      'Royalty-Free Music',
+      'Titles & Descriptions',
       'Full transcript',
-      'SEO-optimized article (800 words)',
-      'Audio + Video distribution to all platforms',
-      'Social media content calendar',
+      'SEO-optimized article ( up to 800 words)',
+      'Distribution to YouTube & podcast platforms',
+      'Social media post suggestions',
       'Analytics & performance tracking',
       '2 revisions included'
     ],
@@ -102,20 +123,26 @@ const brandBundles = [
     tier: 'Initiate',
     level: 2,
     prices: [
-      { episodes: 1, price: 'R11 999' },
-      { episodes: 2, price: 'R21 999' }
+      { episodes: 1, price: 'R10 999' },
+      { episodes: 2, price: 'R19 999' }
     ],
     deliverables: [
-      '90-min video recording & advanced editing',
+      'Up to 90-min video recording',
+      'Video Technician on set',
+      'Basic editing & Colour grading',
       'Custom Intro/Outro with branding',
-      '4 x Social media teasers',
-      '5 x Quote graphics',
-      '2 x Thumbnail designs',
-      'Subtitles & Captions',
-      'Full transcript',
-      'SEO-optimized article (500 words)',
-      'Audio + Video distribution',
-      'Social media recommendations'
+      'Up to 3 x Social media reels (15-60s)',
+      'Up to 2 x Quote graphics & Stills',
+      '1 x Thumbnail designs',
+      'Captions for Social Media Clips',
+      'Royalty-Free Music',
+      'Titles & Descriptions',
+      { item: 'Full transcript', included: false },
+      { item: 'SEO-optimized article ( up to 800 words)', included: false },
+      { item: 'Distribution to YouTube & podcast platforms', included: false },
+      { item: 'Social media post suggestions', included: false },
+      { item: 'Analytics & performance tracking', included: false },
+      '1 revisions included'
     ],
     turnaround: '10 working days'
   },
@@ -123,18 +150,20 @@ const brandBundles = [
     tier: 'Novice',
     level: 1,
     prices: [
-      { episodes: 1, price: 'R9 999' },
-      { episodes: 2, price: 'R17 999' }
+      { episodes: 1, price: 'R6 999' },
+      { episodes: 2, price: 'R11 999' }
     ],
     deliverables: [
       '90-min studio recording & editing',
-      'Intro/Outro editing',
-      '3 x Social media teasers',
-      '3 x Quote graphics',
-      '1 x Thumbnail design',
-      'Subtitles & Captions',
-      'Full transcript',
-      'Audio + Video distribution'
+      'Video Technician on set',
+      { item: 'Intro/Outro editing', included: false },
+      { item: '3 x Social media teasers', included: false },
+      { item: '3 x Quote graphics', included: false },
+      { item: '1 x Thumbnail design', included: false },
+      { item: 'Captions for Social Media Clips', included: false },
+      { item: 'Full transcript', included: false },
+      'Audio + Video distribution',
+      'Download link supplied'
     ],
     turnaround: '12 working days'
   },
@@ -165,12 +194,18 @@ const brandBundles = [
 
 export default function App() {
   const [view, setView] = useState<'creator' | 'brand'>('brand');
+  const [isDark, setIsDark] = useState(false);
 
-  // Load saved preference from localStorage
+  // Load saved preferences from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('tim-africa-view');
     if (saved === 'creator' || saved === 'brand') {
       setView(saved);
+    }
+    
+    const savedTheme = localStorage.getItem('tim-africa-theme');
+    if (savedTheme === 'dark') {
+      setIsDark(true);
     }
   }, []);
 
@@ -180,21 +215,35 @@ export default function App() {
     localStorage.setItem('tim-africa-view', newView);
   };
 
+  // Save theme preference to localStorage
+  const handleThemeChange = (dark: boolean) => {
+    setIsDark(dark);
+    localStorage.setItem('tim-africa-theme', dark ? 'dark' : 'light');
+  };
+
   return (
-    <div className="min-h-screen bg-[#F6F6F6]" style={{ fontFamily: 'Poppins, sans-serif' }}>
+    <div 
+      className={`min-h-screen transition-colors duration-300 ${
+        isDark ? 'bg-[#101010]' : 'bg-[#F6F6F6]'
+      }`} 
+      style={{ fontFamily: 'Poppins, sans-serif' }}
+    >
       {/* Header Navigation */}
-      <HeaderNav />
+      <HeaderNav isDark={isDark} />
       
       {/* Toggle Bar */}
-      <div className="sticky top-20 bg-white shadow-sm z-10 py-6">
-        <div className="max-w-7xl mx-auto px-4 flex justify-center">
-          <ToggleSwitch value={view} onChange={handleViewChange} />
+      <div className={`sticky top-20 shadow-sm z-10 py-6 transition-colors duration-300 ${
+        isDark ? 'bg-[#172D3F]' : 'bg-white'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 flex justify-center items-center gap-4 flex-wrap">
+          <ToggleSwitch value={view} onChange={handleViewChange} isDark={isDark} />
+          <ThemeToggle isDark={isDark} onChange={handleThemeChange} />
         </div>
       </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <HeadingBlock view={view} />
+        <HeadingBlock view={view} isDark={isDark} />
 
         {/* Animated content transition */}
         <div className="transition-opacity duration-300">
@@ -209,6 +258,7 @@ export default function App() {
                   deliverables={bundle.deliverables}
                   turnaround={bundle.turnaround}
                   featured={bundle.featured}
+                  isDark={isDark}
                 />
               ))}
             </div>
@@ -224,6 +274,7 @@ export default function App() {
                   turnaround={bundle.turnaround}
                   featured={bundle.featured}
                   note={bundle.note}
+                  isDark={isDark}
                 />
               ))}
             </div>
@@ -231,7 +282,7 @@ export default function App() {
         </div>
       </div>
 
-      <Footer />
+      <Footer isDark={isDark} />
     </div>
   );
 }
